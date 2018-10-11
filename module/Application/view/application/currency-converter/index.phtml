@@ -1,0 +1,42 @@
+<?php
+$this->form->prepare();
+
+?>
+<div class="jumbotron">
+    <h1>Example application!</h1>
+
+    <p>
+        Select action from menu above.
+    </p>
+</div>
+
+<?php
+print $this->form()->openTag($form);
+?>
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Converter </h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <?php print $this->formRow($form->get('amount')); ?>
+                </p>
+                <p>
+                    <?php print $this->formRow($form->get('converted')); ?>
+                </p>
+                <p>
+                    <?php print $this->formRow($form->get('convert')); ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+print $this->formRow($form->get('source_currency'));
+print $this->formRow($form->get('target_currency'));
+print $this->form()->closeTag();
+?>
