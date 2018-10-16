@@ -13,9 +13,11 @@ class CurrencyConverterControllerTest extends CommonControllerTestCase {
     protected $currencyConvertedServiceMock;
 
     /**
-     * 
+     * Main set up
+     *
+     * Prepare currency converter mock and store it in a container.
      */
-    public function setUp(){
+    public function setUp() {
         parent::setUp();
 
         // prepare mock for conversion service
@@ -36,11 +38,11 @@ class CurrencyConverterControllerTest extends CommonControllerTestCase {
     }
 
     /**
-     * Test main page
+     * Test main currency converter page
      *
      * @throws \Exception
      */
-    public function testIndexActionCanBeAccessed(){
+    public function testIndexActionCanBeAccessed() {
         $this->dispatch('/currency_converter', 'GET');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('application');
@@ -50,17 +52,18 @@ class CurrencyConverterControllerTest extends CommonControllerTestCase {
     }
 
     /**
-     * Test main page
+     * Test conversion endpoint. This returns json response.
      *
      * @throws \Exception
      */
-    public function testConvertActionCanBeAccessed(){
+    public function testConvertActionCanBeAccessed() {
         $this->dispatch('/currency_converter/convert', 'GET');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('application');
         $this->assertControllerName(CurrencyConverterController::class); // as specified in router's controller name alias
         $this->assertControllerClass('CurrencyConverterController');
         $this->assertMatchedRouteName('currency_converter_convert');
+        $this->assertResponseHeaderRegex('Content-Type', '/json/ims');
     }
 
     /**
@@ -68,13 +71,15 @@ class CurrencyConverterControllerTest extends CommonControllerTestCase {
      *
      * @throws \Exception
      */
-    public function testBasicConversion(){
+    public function testBasicConversion()  {
 
         $this->currencyConvertedServiceMock->expects(self::any())->method('convert')->willReturn(1);
 
 
         $this->dispatch('/currency_converter/convert?amount=100', 'GET');
         $this->assertResponseStatusCode(200);
+        $this->assertResponseHeaderRegex('Content-Type', '/json/ims');
+        
         $responseContent = $this->getResponse()->getContent();
 
         $responseContentParsed = json_decode($responseContent, true);
@@ -90,7 +95,7 @@ class CurrencyConverterControllerTest extends CommonControllerTestCase {
      *
      * @throws \Exception
      */
-    public function testConversionException(){
+    public function testConversionException() {
 
         $this->currencyConvertedServiceMock->expects(self::any())->method('convert')->willThrowException(new \Exception('test message'));
 

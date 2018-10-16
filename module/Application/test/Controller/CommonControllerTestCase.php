@@ -11,9 +11,10 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
  */
 class CommonControllerTestCase extends AbstractHttpControllerTestCase {
 
-
-    public function setUp()
-    {
+    /**
+     * Common setUp for all controller tests
+     */
+    public function setUp() {
         // The module configuration should still be applicable for tests.
         // You can override configuration here with test case specific values,
         // such as sample view templates, path stacks, module_listener_options,

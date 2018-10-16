@@ -6,15 +6,13 @@ namespace Application;
  * 
  * @package Application
  */
-class Module
-{
+class Module {
     const VERSION = '3.0.3-dev';
 
     /**
      * @param \Zend\Mvc\MvcEvent $e
      */
-    public function onBootstrap(\Zend\Mvc\MvcEvent $e)
-    {
+    public function onBootstrap(\Zend\Mvc\MvcEvent $e) {
 
         /** @var \Zend\Mvc\Application $app */
         $app = $e->getTarget();
@@ -32,8 +30,7 @@ class Module
      *
      * @return mixed
      */
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/../config/module.config.php';
     }
 }

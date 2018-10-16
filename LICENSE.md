@@ -1,4 +1,8 @@
-Copyright (c) 2005-2016, Zend Technologies USA, Inc.
+This application is based on Zend Technologies Zend Framework Skeleton Application.
+
+This code can be used only as a demo and cannot be used for any commercial purpose.
+
+Copyright (c) 2005-2018, Zend Technologies USA, Inc.
 
 All rights reserved.
 

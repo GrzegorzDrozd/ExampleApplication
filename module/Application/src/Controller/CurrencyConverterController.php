@@ -5,6 +5,7 @@ use GrzegorzDrozd\CurrencyConverter\ConversionForm;
 use GrzegorzDrozd\CurrencyConverter\CurrencyConverterService;
 use Zend\Log\Logger;
 use Zend\Log\LoggerAwareInterface;
+use Zend\Log\LoggerInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -46,9 +47,9 @@ class CurrencyConverterController extends AbstractActionController implements Lo
      *
      * Displays form and handles UI.
      *
-     * @return ViewModel
+     * @return \Zend\View\Model\ModelInterface
      */
-    public function indexAction() {
+    public function indexAction(): \Zend\View\Model\ModelInterface {
         return new ViewModel(['form'=>$this->getForm()]);
     }
 
@@ -57,9 +58,9 @@ class CurrencyConverterController extends AbstractActionController implements Lo
      *
      * Ajax call. It does actual conversion.
      *
-     * @return JsonModel
+     * @return \Zend\View\Model\ModelInterface
      */
-    public function convertAction(){
+    public function convertAction(): \Zend\View\Model\ModelInterface {
 
         // check if we have correct amount
         $amount = $this->params()->fromQuery('amount', 0);
@@ -88,7 +89,7 @@ class CurrencyConverterController extends AbstractActionController implements Lo
     /**
      * @return CurrencyConverterService
      */
-    protected function getCurrencyConverter(): CurrencyConverterService {
+    public function getCurrencyConverter(): CurrencyConverterService {
         return $this->currencyConverter;
     }
 
@@ -102,14 +103,14 @@ class CurrencyConverterController extends AbstractActionController implements Lo
     /**
      * @return Logger
      */
-    protected function getLogger(): Logger {
+    protected function getLogger(): LoggerInterface {
         return $this->logger;
     }
 
     /**
      * @param \Zend\Log\LoggerInterface $logger
      */
-    public function setLogger(\Zend\Log\LoggerInterface $logger): void {
+    public function setLogger(LoggerInterface $logger): void {
         $this->logger = $logger;
     }
 

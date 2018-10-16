@@ -8,8 +8,7 @@ use Zend\View\Model\ViewModel;
  * Class IndexController
  * @package Application\Controller
  */
-class IndexController extends AbstractActionController
-{
+class IndexController extends AbstractActionController {
 
     /**
      * Main page view.
@@ -18,7 +17,7 @@ class IndexController extends AbstractActionController
      *
      * @return ViewModel
      */
-    public function indexAction() {
+    public function indexAction(): \Zend\View\Model\ModelInterface {
         return new ViewModel();
     }
 }

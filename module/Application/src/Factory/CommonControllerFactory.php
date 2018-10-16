@@ -4,6 +4,7 @@ namespace Application\Factory;
 use Application\Controller\CurrencyConverterController;
 use Interop\Container\ContainerInterface;
 use Zend\Log\LoggerAwareInterface;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\Factory\AbstractFactoryInterface;
 
 /**
@@ -18,7 +19,7 @@ class CommonControllerFactory implements AbstractFactoryInterface {
      * @param  string $requestedName
      * @return bool
      */
-    public function canCreate(ContainerInterface $container, $requestedName) {
+    public function canCreate(ContainerInterface $container, $requestedName): bool {
         return $container->get('Di')->has($requestedName);
     }
 
@@ -30,9 +31,11 @@ class CommonControllerFactory implements AbstractFactoryInterface {
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param null|array $options
-     * @return CurrencyConverterController
+     * @return AbstractActionController
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null){
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AbstractActionController {
+
+        /** @var AbstractActionController $controller */
         $controller = $container->get('Di')->get($requestedName, (array)$options);
 
         if ($controller instanceof LoggerAwareInterface) {

@@ -1,8 +1,10 @@
 <?php
 namespace Application;
 
+use Application\Controller\CurrencyConverterController;
 use Application\Factory\CurrencyConverterControllerFactory;
 use Application\Factory\IndexControllerFactory;
+use GrzegorzDrozd\CurrencyConverter\CurrencyConverterService;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 return [
@@ -41,13 +43,11 @@ return [
         ],
     ],
 
-//    'service_manager' => [
-//        'factories' => [
-//            \Zend\Log\Logger::class => function () {
-//    die('ddddd');
-//            }
-//        ],
-//    ],
+    'currency_converter'    => [
+        'forge' => [
+            'key'   => 'NpQYwk5r38oRWweqlsBHTyVyUsknJr4c'
+        ]
+    ],
 
     'log' => [
         'writers' => [
@@ -69,12 +69,30 @@ return [
         ],
     ],
     'controllers' => [
+        'factories' => [
+            CurrencyConverterController::class => function (\Interop\Container\ContainerInterface $container) {
+                // get current config
+                $config = $container->get('config');
+                /** @var CurrencyConverterController $controller */
+
+                // get controller instance
+                $controller = $container->get('Di')->get(CurrencyConverterController::class);
+
+                // get auto created converter and set api key to use.
+                $controller->getCurrencyConverter()->setApiKey($config['currency_converter']['forge']['key']);
+
+                // set logger
+                $controller->setLogger($container->get(\Zend\Log\Logger::class));
+
+                return $controller;
+            }
+        ],
+
         //one factory to create them all
         'abstract_factories'=> [
             Factory\CommonControllerFactory::class
         ],
     ],
-
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

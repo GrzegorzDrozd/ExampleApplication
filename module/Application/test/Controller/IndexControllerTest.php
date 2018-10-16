@@ -9,8 +9,13 @@ use Application\Controller\IndexController;
  * @package ApplicationTest\Controller
  */
 class IndexControllerTest extends CommonControllerTestCase {
-    public function testIndexActionCanBeAccessed()
-    {
+
+    /**
+     * Check if main page of the application can be viewed
+     *
+     * @throws \Exception
+     */
+    public function testIndexActionCanBeAccessed() {
         $this->dispatch('/', 'GET');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('application');
@@ -19,14 +24,22 @@ class IndexControllerTest extends CommonControllerTestCase {
         $this->assertMatchedRouteName('home');
     }
 
-    public function testIndexActionViewModelTemplateRenderedWithinLayout()
-    {
+    /**
+     * Check rendered page
+     *
+     * @throws \Exception
+     */
+    public function testIndexActionViewModelTemplateRenderedWithinLayout() {
         $this->dispatch('/', 'GET');
         $this->assertQuery('.container .jumbotron');
     }
 
-    public function testInvalidRouteDoesNotCrash()
-    {
+    /**
+     * Test if 404 page returns correct response code
+     *
+     * @throws \Exception
+     */
+    public function testInvalidRouteDoesNotCrash() {
         $this->dispatch('/invalid/route', 'GET');
         $this->assertResponseStatusCode(404);
     }
