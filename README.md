@@ -40,4 +40,4 @@ http://127.0.0.1:8080
 
 ## Requirements
 This application was written on php 7.2.10. I did not test it on different version of php.
-Required extensions: curl, openssl, sockets
+Required extensions: curl, json, openssl, sockets
