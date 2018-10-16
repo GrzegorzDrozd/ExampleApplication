@@ -15,6 +15,20 @@ Then run composer:
 cd example
 composer install
 ```
+If during installation composer asks similar question:
+```
+Please select which config file you wish to inject 'Zend\Hydrator' into:
+  [0] Do not inject
+  [1] config/modules.config.php
+  [2] config/development.config.php.dist
+  Make your selection (default is 0):1
+```
+Please answer with "config/modules.config.php" option and on the following question:
+```
+  Remember this option for other packages of the same type? (y/N)
+```
+Answer with "y".
+
 You can now serve application using built in php server:
 ```
 php -S 127.0.0.1:8080 -t public
