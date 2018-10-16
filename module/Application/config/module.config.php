@@ -70,22 +70,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            CurrencyConverterController::class => function (\Interop\Container\ContainerInterface $container) {
-                // get current config
-                $config = $container->get('config');
-                /** @var CurrencyConverterController $controller */
-
-                // get controller instance
-                $controller = $container->get('Di')->get(CurrencyConverterController::class);
-
-                // get auto created converter and set api key to use.
-                $controller->getCurrencyConverter()->setApiKey($config['currency_converter']['forge']['key']);
-
-                // set logger
-                $controller->setLogger($container->get(\Zend\Log\Logger::class));
-
-                return $controller;
-            }
+            CurrencyConverterController::class => CurrencyConverterControllerFactory::class
         ],
 
         //one factory to create them all
