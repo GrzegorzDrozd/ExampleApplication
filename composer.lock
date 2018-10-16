@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "793f1e4129668f005a814b9ce9a3d2e2",
+    "content-hash": "f450f274caaa9230810510fe2c69231a",
     "packages": [
         {
             "name": "cache/adapter-common",
@@ -401,7 +401,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:GrzegorzDrozd/CurrencyConverter.git",
-                "reference": "bd3f895ec3255e76fc2cb9a75b8698d992388749"
+                "reference": "4dce06d54b84ea2b1a0d2e5630ea0f51547e0c0b"
             },
             "require": {
                 "cache/filesystem-adapter": "^1.1@dev",
@@ -410,6 +410,11 @@
                 "php-http/message": "^1.6@dev"
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GrzegorzDrozd\\": "src/"
+                }
+            },
             "license": [
                 "proprietary"
             ],
@@ -420,7 +425,7 @@
                 }
             ],
             "description": "Example application, currency converting logic",
-            "time": "2018-10-10T20:02:28+00:00"
+            "time": "2018-10-16T06:30:51+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -5258,7 +5263,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "ext-json": "*"
     },
     "platform-dev": []
 }
